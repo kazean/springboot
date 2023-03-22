@@ -61,6 +61,14 @@ public void onStartUp(Set<Class<?>> c, ServeltContext cctx) throws ServletExcept
 ```
 
 - 구현 hello.container.MyContainerInitV1
+```
+public class MyContainerInitV1 implements ServletContainerInitializer {
+    @Override
+    public void onStartup(Set<Class<?>> c, ServletContext ctx) throws ServletException {
+        ~
+    }
+}
+```
 
 - 초기화 클래스 지정
 ```
@@ -76,8 +84,10 @@ hello.container.MyContainerInitV1
 2. 프로그래밍 방식
 ```
 - hello.servlet.HelloServlet
+> mapping X
 ```
-extends HttpServlet
+extends 
+resp.getWriter().println("hello servlet!");
 ```
 
 - [애플리케이션 초기화]
@@ -109,8 +119,9 @@ hello.container.MyContainerInitV2
 ```
 
 ## 정리 
-- 서블릿 컨테이너 초기화 resources/META-INF/services/jakarta.servlet.ServletContainerInitializer > MyContainerInit
-- 애플리케이션 초기화 특정 인터페이스 지정 @HandlesTypes(AppInit.class)
+- `서블릿 컨테이너 초기화` resources/META-INF/services/jakarta.servlet.ServletContainerInitializer > MyContainerInit
+- `애플리케이션 초기화` 특정 인터페이스 지정 @HandlesTypes(AppInit.class)
+
 
 ## 스프링 컨테이너 등록
 > 스프링 컨테이너 만들기
@@ -128,12 +139,13 @@ implementation 'org.springframework:spring-webmvc:6.0.4'
 @RestController
 @GetMapping("/hello-spring")
 ```
+
 - 스프링 설정파일 생성 hello.spring.HelloConfig
 ```
 @Configuration
-
 @Bean // helloController
 ```
+
 - 스프링 애플리케이션 초기화 생성 hellop.container.AppInitV2Spring
 ```
 new AnnotationConfigWebApplicationConteext()
@@ -147,7 +159,7 @@ servlcetContext.addServlet("dispatcherV2", dispatcher)
 ```
 
 ## 스프링 MVC 서블릿 컨테이너 초기화 지원
-- WebApplicationInitializer
+- `WebApplicationInitializer`
 - hello.container.AppInitV3SpringMvc 구현
 ```
 implements WebApplicationInitializer
