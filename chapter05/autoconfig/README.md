@@ -1,4 +1,4 @@
-# [실습] 05 자동구성
+# [실습] 05-01 자동구성
 ## 1. 프로젝트 설정
 - autoconfig-start > autoconfig
 - build.gradle
