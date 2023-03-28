@@ -64,7 +64,7 @@ arguments.getSourceArgs()/getOpiotnNames()/OptionNames() + iter getOptionValues(
 
 ## 8. 외부 설정 - 스프링 통합
 - !어디에 있는 외부 설정값을 읽어야 하는지에 따라서 각각 일는 방법이 다르다는 단점
-- Environment, PropertySource
+- `Environment, PropertySource`
 > key=value형식
 ```
 org.springframework.core.env.PropertySource
@@ -80,7 +80,7 @@ org.springframework.core.env.PropertySource
 ## 9. 설정 데이터1 - 외부 파일
 - !OS환경변수, 자바시스템, 커맨드라인옵션인수 값이 늘어날 수록 사용 불편
 - 스프링과 설정 데이터
-> application.properties, application.yml
+> `application.properties, application.yml`
 - build/libs/application.properties
 ```
 url=dev.db.com
@@ -94,18 +94,18 @@ password=dev_pw
 ## 10. 설정 데이터2 - 내부 파일 분리
 - !설정 파일 외부 관리 번거로움
 - 프로젝트 내부 파일 포함, 빌드 시점 함께 빌드 jar
-- application-{profile}.properties
-> [자바시스템, 커맨드라인옵션인수] spring.profiles.active=dev/prod s
+- `application-{profile}.properties`
+> [자바시스템, 커맨드라인옵션인수] `spring.profiles.active=dev/prod` s
 > !설정 파일 분리
 
 ## 11. 설정 데이터3 - 내부 파일 합체
 - !설정 파일 분리해서 관리시 한눈에 전체가 들어오지 않는 단점
 - 물리적인 하나의 파일 안에 논리적으로 영역을 구분하는 방법
 - application.properties
-> #---, !---
+> `#---, !---` 구분자
 - application.yml
-> ---
-- spring.config.activate.on-profile에 프로필 값 지정
+> `---`
+- `spring.config.activate.on-profile`에 프로필 값 지정
 - main/resources/application.properties
 ```
 spring.config.activate.on-profile=dev
