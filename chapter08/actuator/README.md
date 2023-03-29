@@ -102,7 +102,7 @@ info.app.company: yh
 > http://localhost:8080/actuator/info
 
 - build
-> build.gradle
+> build.gradle `springBoot Extension > buildInfo()`
 ```
 springBoot {
 	buildInfo()
@@ -112,7 +112,7 @@ springBoot {
 >> http://localhost:8080/actuator/info
 
 - git
-> build.gradle
+> build.gradle plugin `gradle-git-properties`
 ```
 plugins {
 	id "com.gorylenko.gradle-git-properties" version "2.4.1" //git info
