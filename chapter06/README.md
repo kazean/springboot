@@ -15,7 +15,7 @@
 
 ## 3. 외부 설정 - OS 환경변수
 ```
-System.getenv()
+System.getenv() : Map<String,String>
 System.getenv(key)
 ```
 

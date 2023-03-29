@@ -8,7 +8,9 @@ import java.util.Map;
 public class OsEnv {
 
     public static void main(String[] args) {
-        Map<String, String> getenv = System.getenv();
+        Map<String, String>
+                getenv = System.getenv();
+        
         for (String key : getenv.keySet()) {
             log.info("OsEnv {}={}", key, System.getenv(key));
         }
