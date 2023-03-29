@@ -13,7 +13,7 @@ OS 환경변수
 커맨드 라인 옵션 인수
 ```
 - 다양한 외부 설정 읽기
-> `Environment`는 물롱니고 Enviroment를 활용해서 더 편리하게 외부 설정을 읽는 방법
+> `Environment`는 물론이고 Enviroment를 활용해서 더 편리하게 외부 설정을 읽는 방법
 - 스프링이 지원하는 다양한 외부 설정 조회 방법
 > `Environment`
 > `@Value`
