@@ -21,7 +21,7 @@ System.getenv(key)
 
 ## 4. 외부 설정 - 자바 시스템 속성
 ```
-System.getProperties()
+System.getProperties() : Properties
 System.getPropery(String.valueOf(key))
 ```
 > -Durl=devdb -Dusername=dev_user -Dpassword=dev_pw
@@ -38,28 +38,19 @@ iter log args
 
 ## 6. 외부 설정 - 커맨드 라인 옵션 인수
 - `커맨드 라인 옵션 인수(command line option arguments)`
-- --key=value 형식으로 사용
+- `--key=value` 형식으로 사용
 ```
 new DefaultApplicationArguments(args)
-appArgs.getSourceArgs()
-appArgs.getNoOptionArgs()
-appArgs.getOptionNames()
-
-getOptionNames iter
-
+appArgs.getSourceArgs() : List<String>
+appArgs.getNoOptionArgs() : List<String>
+appArgs.getOptionNames() : Set<String>
 getOptionValues : List<Object>
 ```
 > --url=devdb --username=dev_user --password=dev_pw mode=on
 > cf, 커맨드 라인 옵션 인수는 자바 언어의 표준 기능이 아니다. 스프링 편리함을 위해 제공하는 기능
 
 ## 7. 외부 설정 - 커맨드 라인 옵션 인수와 스프링 부트
-```
-@Component
-private fianl ApplicationArguments
-
-@PostContruct
-arguments.getSourceArgs()/getOpiotnNames()/OptionNames() + iter getOptionValues(key)
-```
+`ApplicationArguments` > new DefaultApplicationArguments
 > --url=devdb --username=dev_user --password=dev_pw mode=on
 
 ## 8. 외부 설정 - 스프링 통합
@@ -94,7 +85,7 @@ password=dev_pw
 ## 10. 설정 데이터2 - 내부 파일 분리
 - !설정 파일 외부 관리 번거로움
 - 프로젝트 내부 파일 포함, 빌드 시점 함께 빌드 jar
-- `application-{profile}.properties`
+- src/main/resources/`application-{profile}.properties`
 > [자바시스템, 커맨드라인옵션인수] `spring.profiles.active=dev/prod` s
 > !설정 파일 분리
 
