@@ -190,7 +190,6 @@ scrape_configs:
 
 ## 13. 그라파나 - 공유 대시보드 활용
 - 스프링부트 시스템 모니터 대시보드 불러오기
-- https://grafana.com/grafana/dashboards
 - https://grafana.com/grafana/dashboards/11378-justai-system-monitor/ , ID: 11378
 > Dashboards > New > Import > 11378(ID)
 - 불러온 대시보드 수정하기
