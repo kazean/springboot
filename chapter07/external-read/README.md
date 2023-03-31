@@ -1,4 +1,4 @@
-# 7. 외부설정과 프로필2
+# [실습] 7. 외부설정과 프로필2
 ## 1. 프로젝트 설정
 - external-read-start > external-read
 - build.gradle

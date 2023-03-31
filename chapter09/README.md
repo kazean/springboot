@@ -1,4 +1,4 @@
-# [실습] 9.마이크로미터, 프로메테우스, 그라파나
+# [이론정리] 9.마이크로미터, 프로메테우스, 그라파나
 ## 1.마이크로미커 소개
 - 그라파나 대시보드, 핀포인트
 - 모니터링 툴에 지표 전달
@@ -6,7 +6,7 @@
 > !기존에 측정했던 코드를 모두 변경한 툴에 맞도록 다시 변경해야된다
 >> 이런 문제를 해결하는 것이 바로 `마이크로미터(Micrometer)` 라이브러리이다.
 - 마이크로미터 추상화
-> micrometer JMX 구현체, micrometer프로메테우스 구현체
+> `micrometer JMX 구현체 / 프로메테우스 구현체`
 - 마이크로미터 전체 그림
 > 마이크로미터 = `애플리케이션 메트릭 파사드`, 메트릭을 마이크로미터가 정한 표준 방법으로 모아서 제공
 > 추상화를 통해서 구현체를 갈아끼움 ex) SLF4J
@@ -21,10 +21,6 @@
 > tag:area, values[heap, nonheap]
 >> tag=KEY:VALUE 형태로 필터사용
 >> ex) ~/actuator/metrics/jvm.memory.used?tag=area:heap
-- http 요청수 확인
-> ~/actuator/metrics/http.server.requests
-- log요청만 필터링
-> ~/actuator/metrics/http.server.requests?tag=uri:/log
 - log요청, Http status =200
 > ~/actuator/metrics/http.server.requests?tag=uri:/log&tag=status:200
 
@@ -38,7 +34,7 @@
 > application.ready.time : 요청을 처리할 준비가 되는데 걸리는 시간
 > ApplicationStartedEvent
 > ApplicationReadyEvent
-- @`스프링 MVC 메트릭`, 스프링 MVC 컨트롤러가 처리하는 모든 요청, http.server.requests
+- [중요] `스프링 MVC 메트릭`, 스프링 MVC 컨트롤러가 처리하는 모든 요청, http.server.requests
 > TAG를 사용해서 다음 정보를 분류할 수 있다.
 >> uri, method, status, exception, outcome(상태코드 그룹을 모아 확인)
 - `데이터소스 메트릭`, Datasource, 커넥션풀에 관한 메트릭, jdbc.connection
@@ -60,30 +56,27 @@ server:
 > https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.metrics.supported
 
 ## 4. 프로메테우스와 그라파나 소개
-- 프로메테우스
+- `프로메테우스`
 > 메트릭을 지속해서 수집하고 DB에 저장
-- 그라파나
+- `그라파나`
 > 사용자가 보기 편하게 보여주는 대시보드
 
 ## 5. 프로메테우스 - 설치
 - https://prometheus.io/download/
 > ./prometheus 
 >> 시스템환경설정 > 보안 및 개인정보보호 > 일반 > 사용차단해제
-> http://localhost:9090
+> `http://localhost:9090`
 
 ## 6. 프로메테우스 - 애플리케이션 설정
 - 애플리케이션의 메트릭을 수집하도록 연동
-1. 애플리케이션 설정 : 프로메테우스 포멧에 맞추어 메트릭 만들기
-2. 프로메테우스 설정 : 프로메테우스가 애플리케이션의 메트릭 수집하도록 설정
+1. `애플리케이션 설정` : 프로메테우스 포멧에 맞추어 메트릭 만들기
+2. `프로메테우스 설정` : 프로메테우스가 애플리케이션의 메트릭 수집하도록 설정
 - 1. 애플리케이션 설정
 > 프로메테우슨 /actuator/metrics의 JSON포맷은 이해하지 못한다.
 >> 마이클 미터가 해결
-- build.gradle (`micrometer-registry-prometheus`)
-```
-implementation 'io.micrometer:micrometer-registry-prometheus' //추가
-```
+- build.gradle (`impl io.micrometer:micrometer-registry-prometheus`)
 > 스프링부트와 액쵸에이터가 자동구성으로 마이크로미터 프로메테우스 구현체를 등록해 동작하도록 설정
->> http://localhost:8080/actuator/prometheus
+>> `http://localhost:8080/actuator/prometheus`
 - 포맷차이
 > jvm.info > jvm_info
 > logback.events > loback_events_total (카운터, _total 관례) 
@@ -93,7 +86,7 @@ implementation 'io.micrometer:micrometer-registry-prometheus' //추가
 >> http_server_requests_seconds_max
 
 ## 7. 프로메테우스 - 수집설정
-- prometheus.yml
+- `prometheus.yml`
 ```
 scrape_configs:
 	- job_name: "spring-actuator"
@@ -110,7 +103,6 @@ scrape_configs:
 > menu > Status > Targets
 >> Status(UP/DOWM)
 - 프로메테우스를 통한 데이터 조회
-> jvm_info
 
 ## 8. 프로메테우스 - 기본기능
 > http_server_requests_seconds_count
@@ -135,12 +127,12 @@ scrape_configs:
 
 - 연산자와 쿼리 함수
 > 연산자(+, -, *, /, %, ^)
-> sum(http_server_requests_seconds_count)
-> sum by(method, status)(http_server_requests_seconds_count) : group by 유사
-> count(http_server_requests_seconds_count)
-> topk(3, http_server_requests_seconds_count)
-> http_server_requests_seconds_count offest 10m
-> 범위 백터 선택기 http_server_requests_seconds_count[1m]
+> sum: sum(http_server_requests_seconds_count)
+> sum by: sum by(method, status)(http_server_requests_seconds_count) : group by 유사
+> count: count(http_server_requests_seconds_count)
+> topk: topk(3, http_server_requests_seconds_count)
+> offest: http_server_requests_seconds_count offest 10m
+> 범위 백터 선택기: http_server_requests_seconds_count[1m]
 >> 범위 벡터 선택기는 차트에 바로 표현할 수 없다
 
 ## 9. 프로메테우스 게이지와 카운터
@@ -179,7 +171,7 @@ scrape_configs:
 - CPU 메트릭 만들기
 > system_cpu_usage, process_cpu_usage + Query
 > 그래프의 데이터 이름 변경
->> 범례(Legend)
+>> `범례(Legend)`
 > 패널 이름 설정, 패널 저장하기
 
 - 디스크 사용량 추가하기
@@ -213,24 +205,11 @@ JVM 메모리 사용량 초과
 커넥션 풀 고갈
 에러 로그 급증
 ```
-- hello.controller.TrafficController
-```
-@Get("/cpu")
-	value++;
-```
+- CPU 사용량 초과
 > Hello Dashboards(system.cpu.usage, process.cpu.usage)
-- JVM 메모리 사용량 초과
-```
-List<String>
-@Get("jvm)
-	hello jvm! + i
-```
+- JVM 메모리 사용량 초과 > OOM
 > jvm dashboard
 - 에러로그 급증
-```
-@Get("/error-log")
-	log.error
-```
 > ERROR Logs, logback_events_total
 - 정리
 > 메트릭을 보는 것은 정확한 값을 보는 것이 목적이 아니다. 대략적인 값과 추세를 확인하는 것이 주 목적
