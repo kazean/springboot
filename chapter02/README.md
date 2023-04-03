@@ -163,3 +163,8 @@ org.springframework.web.SpringServletContainerInitializer
 @HandlesTypes(WebApplicationInitializer.class)
 public class SpringServletContainerInitializer implements ServletContainerInitializer
 ```
+
+- 정리
+> 서블릿 컨테이너 초기화 사용, 스프링 컨테이너도 등록, 스프링MVC가 동작하도록 디스패처 서블릿 연결, 스프링 초기화 방법
+> 모두 서블릿 컨테이너 위에서 동작하는 방식, 서블릿 컨테이너에 배포를 해야만 동작하는 방식
+>> 내장 톰캣사용하면 이런부분이 바뀐다
