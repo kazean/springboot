@@ -1,5 +1,5 @@
 # [실습] 05-02 자동구성
-## 09.순수 라이브러리 사용하기 2
+## 09.순수 라이브러리 사용하기 1
 - project-v1-start > project-v1
 - hello.controller
 ```

@@ -91,7 +91,7 @@ implements Condition
 > 기존 @Conditional 주석, @ConditionalOnProperty(name = "memory", havingValue = "on")
 - @ConditionalOnXXX
 > @ConditionalOnClass/MissingClass
-> @ConditionOnBean,MssingBean
+> @ConditionOnBean,MissingBean
 > @ConditionalOnPropertiy
 > @ConditionalOnWebApplication,NotWebApplication
 > @ConditionalOnExpression

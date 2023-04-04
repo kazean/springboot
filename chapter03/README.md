@@ -57,7 +57,7 @@ task buildFatJar(type: Jar) {
 >> context.addServletMappingDecoded() 등록한 서블릿의 경로를 매핑한다.
 > 톰캣시작, tomcat.start()
 
-> 내장톰캣을 사용한 덕분에 IDE에 별도의 복잡한 톰캣 설정없이 main()메서드만 실행하면 톰캣ㅅ까지 매우 편리하게 실행
+> 내장톰캣을 사용한 덕분에 IDE에 별도의 복잡한 톰캣 설정없이 main()메서드만 실행하면 톰캣까지 매우 편리하게 실행
 
 ## 4. 내장 톰캣3 - 스프링
 - 스프링 톰캣설정, EmbedTomcatSpringMain
@@ -104,7 +104,7 @@ package
 ## 6. 내장 톰캣5 - 빌드와 배포 2
 - FatJar
 - jar build: ./gradlew clean buildFatJar
-- jar 압축푸기
+- jar 압축풀기
 ```
 META-INF
     MANIFEST.MF
@@ -119,7 +119,7 @@ package
 >> 하나의 jar파일로 배포부터, 웹 서버 설치+실행
 > !Fat Jar 단점
 >> 파일명 중복을 해결할 수 없다
->> 어던 라이브러리가 포함되어 있는지 확인하기 어렵다
+>> 어떤 라이브러리가 포함되어 있는지 확인하기 어렵다
 
 ## 7. 편리한 부트 클래스 만들기
 - 내장톰캣실행, 스프링컨테이너생성, 디스패처서블릿등록의 모든 과정을 편리하게 처리해주는 나만의 부트 클래스 만들기

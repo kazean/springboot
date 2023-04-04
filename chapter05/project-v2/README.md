@@ -4,7 +4,7 @@
 > project-v1 > project-v2
 - hello.controller.HelloController
 
-## 13.자동 구성 라이브러리 사용하기
+## 13.자동 구성 라이브러리 사용하기2
 - libs/memory-v2.jar
 - build.gradle
 ```
