@@ -1,17 +1,17 @@
 # [이론정리] 8. 액츄에이터
 ## 1. 프로덕션 준비 기능이란
 - 서비스에 문제가 없는지 모니터링하고 지표들을 심어서 감시하는 활동들이다.
-- `프로덕션 준비 기능` 프로덕션을 운영에 배포할 때 준비해야 하는 비 기능적 요소들을 뜻한다
+- `프로덕션 준비 기능`: 프로덕션을 운영에 배포할 때 준비해야 하는 비 기능적 요소들을 뜻한다
 ```
 지표(Metric), 추적(Trace), 감사(Aduit)
 모니터링
 ```
-- `액츄에이터` 프로덕션 준비 기능을 매우 편리하게 사용할 수 있는 다양한 편의 기능
+- `액츄에이터`: 프로덕션 준비 기능을 매우 편리하게 사용할 수 있는 다양한 편의 기능, 시스템을 움직이거나 제어하는데 쓰이는 기계장치
 > 스프링부트가 제공, 마이크로미터, 프로메테우스, 그라파나 같은 최근 유행하는 모니터링 툴과 연동 기능
 
 ## 2. 프로젝트 설정
 - actuator-start > actuator
-> Spring-web, Data JPA, Actuator, H2, Lombok
+> starter-web, starter-data-jPA, starter-actuator, H2, Lombok
 
 ## 3. 액츄에이터 시작
 - build.gradle, `org.springframework.boot:spring-boot-starter-actuator`
@@ -56,6 +56,7 @@ management:
 
 ## 6. 헬스정보
 - `http://localhost:8080/actuator/health`
+> {"status": "UP"}
 > 단순히 `애플리케이션 요청에 응답판단`을 넘어서 `데이터베이스가 응답(validationQuery)`하는지, `디스크 사용량에 문제`가 없는지 같은 다양한 정보
 - 헬스정보 자세히/간략히 보기
 > `management.endpoint.health.show-details/show-components=always`
@@ -81,7 +82,7 @@ git : git.properties
 >> 주의! management.endpoint 하위가 아니다
 
 - `env`
-> `management.info.env.enabled= true`
+> `management.info.env.enabled= true`, info.로 시작하는 정보
 ```
 info.app.name: hello-actuator
 info.app.company: yh
@@ -104,7 +105,7 @@ plugins {
 	id "com.gorylenko.gradle-git-properties" version "2.4.1" //git info
 }
 ```
-> git에 대한 자세한 정보 추가
+> build시 resource/main/git.properties, git에 대한 자세한 정보 추가
 >> `management.info.git.mode= "full"`
 - info 사용자 정의 기능 추가
 > https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.endpoints.info.writing-custom-info-contributors
@@ -112,9 +113,9 @@ plugins {
 ## 8. 로거
 - `loggers 엔드포인트` 로깅과 관련된 정보 확인, 실시간 변경
 > `http://localhost:8080/actuator/loggers`
-- 스프링부트 기본 INFO, 하위도 INFO
+- 스프링부트 기본 ROOT의 configuredLevel: INFO, 하위도 INFO
 > configuredLevel, effectiveLevel
-- 더 자세히 조쇠하기
+- 더 자세히 조회하기
 > http://localhost:8080/actuator/loggers/{로거이름}
 - 실시간 로그 레벨 변경
 ```

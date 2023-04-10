@@ -1,6 +1,6 @@
 # [이론정리] 9.마이크로미터, 프로메테우스, 그라파나
 ## 1.마이크로미커 소개
-- 그라파나 대시보드, 핀포인트
+- 마이크로미터, 그라파나 대시보드, 핀포인트
 - 모니터링 툴에 지표 전달
 - 모니터링 툴 변경
 > !기존에 측정했던 코드를 모두 변경한 툴에 맞도록 다시 변경해야된다
@@ -19,7 +19,7 @@
 > ~/actuator/metrics/jvm.memory.used
 - Tag 필터
 > tag:area, values[heap, nonheap]
->> tag=KEY:VALUE 형태로 필터사용
+>> `tag=KEY:VALUE` 형태로 필터사용
 >> ex) ~/actuator/metrics/jvm.memory.used?tag=area:heap
 - log요청, Http status =200
 > ~/actuator/metrics/http.server.requests?tag=uri:/log&tag=status:200
@@ -72,8 +72,8 @@ server:
 1. `애플리케이션 설정` : 프로메테우스 포멧에 맞추어 메트릭 만들기
 2. `프로메테우스 설정` : 프로메테우스가 애플리케이션의 메트릭 수집하도록 설정
 - 1. 애플리케이션 설정
-> 프로메테우슨 /actuator/metrics의 JSON포맷은 이해하지 못한다.
->> 마이클 미터가 해결
+> 프로메테우스는 /actuator/metrics의 JSON포맷은 이해하지 못한다.
+>> 마이크로미터가 해결
 - build.gradle (`impl io.micrometer:micrometer-registry-prometheus`)
 > 스프링부트와 액쵸에이터가 자동구성으로 마이크로미터 프로메테우스 구현체를 등록해 동작하도록 설정
 >> `http://localhost:8080/actuator/prometheus`
@@ -131,8 +131,8 @@ scrape_configs:
 > sum by: sum by(method, status)(http_server_requests_seconds_count) : group by 유사
 > count: count(http_server_requests_seconds_count)
 > topk: topk(3, http_server_requests_seconds_count)
-> offest: http_server_requests_seconds_count offest 10m
-> 범위 백터 선택기: http_server_requests_seconds_count[1m]
+> offest: http_server_requests_seconds_count offest 10m, 과거데이터
+> 범위 백터 선택기: http_server_requests_seconds_count[1m], 지난 n분간의 모든 기록값을 선택
 >> 범위 벡터 선택기는 차트에 바로 표현할 수 없다
 
 ## 9. 프로메테우스 게이지와 카운터
